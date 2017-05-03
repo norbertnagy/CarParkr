@@ -41,6 +41,10 @@
 
 				 // If there is a match, then the correct name is known
 		 		if($garageCode === $recordCode) {
+					$date = date_create($record->date);
+					$timestamp = date_format($date,"Y-m-d H:i:s");
+					$record->date = $timestamp;
+
 		 			$dataList[] = array(
 		 				"name" => $garageName,
 		 				"data" => $record,
