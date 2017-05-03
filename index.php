@@ -18,10 +18,18 @@
 
 	// Make a new Request
 	$request = new Request();
+
 	// Get JSON data from Open Data Aarhus and decode it
 	$data = json_decode(
       $request->getFile("http://www.odaa.dk/api/action/datastore_search?resource_id=2a82a145-0195-4081-a13c-b0e587e9b89c")
 		);
+
+	// Loop through all of the result records from the live data
+	foreach ($data->result->records as $record) {
+	      $recordCode = $record->garageCode;
+	      echo "This record has the garageCode: ".$recordCode;
+	}
+
 	//Output garage names
 	//var_dump($garageNames);
 
