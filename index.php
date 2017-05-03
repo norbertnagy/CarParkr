@@ -59,12 +59,21 @@
 
 		// Round to 2 decimal
 		$occupancy = round($occupancy,2);
+
+		// Level of occupancy
+		if($occupancy>75) {
+			$level = "high";
+		} elseif($occupancy>50) {
+			$level = "med";
+		} else {
+			$level = "low";
+		}
 	?>
 
 	<article class="card">
 		<h2 class="title"><?php echo $record["name"];?></h2>
 		<div class="bar">
-			<div class="indicator" style="width:<?php echo $occupancy;?>%"></div>
+			<div class="indicator <?php echo $level;?>" style="width:<?php echo $occupancy;?>%"></div>
 		</div>
 		<dl class="stats">
 		    <dt><?php echo $record["data"]->vehicleCount;?></dt>
