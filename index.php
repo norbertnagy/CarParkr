@@ -7,19 +7,31 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-	<?php
-	include('class_request.php');
-	$request = new Request();
-
-	// Get JSON data from Open Data Aarhus and decode it
-	$data = json_decode(
-      $request->getFile("http://www.odaa.dk/api/action/datastore_search?resource_id=2a82a145-0195-4081-a13c-b0e587e9b89c")
-		);
-	?>
 <header>
 	<img src="logo.png">
 </header>
 <main>
+	<?php
+	//Include php files
+	include('class_request.php');
+	include('garageNames.php');
+
+	// Make a new Request
+	$request = new Request();
+	// Get JSON data from Open Data Aarhus and decode it
+	$data = json_decode(
+      $request->getFile("http://www.odaa.dk/api/action/datastore_search?resource_id=2a82a145-0195-4081-a13c-b0e587e9b89c")
+		);
+	//Output garage names
+	//var_dump($garageNames);
+
+	// Loop through the garage names
+	foreach ($garageNames as $garage) {
+       $garageName = $garage["garageName"];
+       $garageCode = $garage["garageCode"];
+       echo "The code ".$garageCode." goes with the name ".$garageName;
+	}
+	?>
 	<article class="card">
 		<h2 class="title">Nørreport</h2>
 		<div class="bar">
