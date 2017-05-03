@@ -54,12 +54,17 @@
 	};
 	// Loop  through $dataList and populate the <article> structure for each card
 	foreach ($dataList as $record) {
+		// Get the occupancy percentage
+		$occupancy = $record["data"]->vehicleCount*100/$record["data"]->totalSpaces;
+
+		// Round to 2 decimal
+		$occupancy = round($occupancy,2);
 	?>
-	
+
 	<article class="card">
 		<h2 class="title"><?php echo $record["name"];?></h2>
 		<div class="bar">
-			<div class="indicator"></div>
+			<div class="indicator" style="width:<?php echo $occupancy;?>%"></div>
 		</div>
 		<dl class="stats">
 		    <dt><?php echo $record["data"]->vehicleCount;?></dt>
@@ -70,7 +75,7 @@
 		    <dd>Capacity</dd>
 	    </dl>
 		<dl class="stats">
-		    <dt>500</dt>
+		    <dt><?php echo $record["data"]->totalSpaces - $record["data"]->vehicleCount;?></dt>
 		    <dd>Free</dd>
 	   </dl>
 	</article>
