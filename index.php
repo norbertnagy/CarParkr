@@ -51,62 +51,33 @@
 		 			);
 		 		}
 		}
-	}
+	};
+	// Loop  through $dataList and populate the <article> structure for each card
+	foreach ($dataList as $record) {
 	?>
+	
 	<article class="card">
-		<h2 class="title">Nørreport</h2>
+		<h2 class="title"><?php echo $record["name"];?></h2>
 		<div class="bar">
 			<div class="indicator"></div>
 		</div>
 		<dl class="stats">
-		    <dt>130</dt>
+		    <dt><?php echo $record["data"]->vehicleCount;?></dt>
 		    <dd>Occupied</dd>
 	    </dl>
 		<dl class="stats">
-		    <dt>630</dt>
+		    <dt><?php echo $record["data"]->totalSpaces;?></dt>
 		    <dd>Capacity</dd>
 	    </dl>
 		<dl class="stats">
 		    <dt>500</dt>
 		    <dd>Free</dd>
-	    </dl>
+	   </dl>
 	</article>
-	<article class="card">
-		<h2 class="title">Nørreport</h2>
-		<div class="bar">
-			<div class="indicator low"></div>
-		</div>
-		<dl class="stats">
-		    <dt>130</dt>
-		    <dd>Occupied</dd>
-	    </dl>
-		<dl class="stats">
-		    <dt>630</dt>
-		    <dd>Capacity</dd>
-	    </dl>
-		<dl class="stats">
-		    <dt>500</dt>
-		    <dd>Free</dd>
-	    </dl>
-	</article>
-	<article class="card">
-		<h2 class="title">Nørreport</h2>
-		<div class="bar">
-			<div class="indicator med" style="width:87%"></div>
-		</div>
-		<dl class="stats">
-		    <dt>130</dt>
-		    <dd>Occupied</dd>
-	    </dl>
-		<dl class="stats">
-		    <dt>630</dt>
-		    <dd>Capacity</dd>
-	    </dl>
-		<dl class="stats">
-		    <dt>500</dt>
-		    <dd>Free</dd>
-	    </dl>
-	</article>
+
+	<?php
+	}
+	?>
 
 </main>
 </html>
