@@ -16,6 +16,9 @@
 	include('class_request.php');
 	include('garageNames.php');
 
+	//Output garage names
+	//var_dump($garageNames);
+
 	// Make a new Request
 	$request = new Request();
 
@@ -24,20 +27,26 @@
       $request->getFile("http://www.odaa.dk/api/action/datastore_search?resource_id=2a82a145-0195-4081-a13c-b0e587e9b89c")
 		);
 
+	// Create new array to store the combined data
+	$dataList = array();
+
 	// Loop through all of the result records from the live data
 	foreach ($data->result->records as $record) {
-	      $recordCode = $record->garageCode;
-	      echo "This record has the garageCode: ".$recordCode;
-	}
+		// Find the correct garage name for each record
+		foreach ($garageNames as $garage) {
+				 $garageName = $garage["garageName"];
+				 $garageCode = $garage["garageCode"];
 
-	//Output garage names
-	//var_dump($garageNames);
+				 $recordCode = $record->garageCode;
 
-	// Loop through the garage names
-	foreach ($garageNames as $garage) {
-       $garageName = $garage["garageName"];
-       $garageCode = $garage["garageCode"];
-       echo "The code ".$garageCode." goes with the name ".$garageName;
+				 // If there is a match, then the correct name is known
+		 		if($garageCode === $recordCode) {
+		 			$dataList[] = array(
+		 				"name" => $garageName,
+		 				"data" => $record,
+		 			);
+		 		}
+		}
 	}
 	?>
 	<article class="card">
